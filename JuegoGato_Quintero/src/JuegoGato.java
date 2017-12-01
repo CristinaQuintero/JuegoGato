@@ -15,6 +15,7 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 
 import com.jgoodies.forms.factories.DefaultComponentFactory;
+
 import java.awt.Label;
 import javax.swing.JDesktopPane;
 import java.awt.Button;
@@ -36,6 +37,7 @@ public class JuegoGato extends JFrame {
 	private static JTextField txtJugador1;
 	private static JTextField txtJugador2;
 	Boolean turno = true;// se inicia con el turno jugador1 por default CIRCULO
+	Comprobacion ganador = new Comprobacion();
 	int btn1, btn2, btn3, btn4, btn5, btn6, btn7, btn8, btn9;
 
 	/**
@@ -63,7 +65,7 @@ public class JuegoGato extends JFrame {
 
 		setIconImage(Toolkit.getDefaultToolkit().getImage(JuegoGato.class.getResource("/Imagenes/TicTacToe.png")));
 		setResizable(false);
-		setTitle("  G A T O");
+		setTitle("  G A T O_Servidor");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(525, 200, 290, 345);
 		contentPane = new JPanel();
@@ -92,23 +94,10 @@ public class JuegoGato extends JFrame {
 		lblTurno.setFont(new Font("SimHei", Font.BOLD, 25));
 		lblTurno.setBounds(96, 11, 81, 30);
 		contentPane.add(lblTurno);
-
 		JButton boton7 = new JButton("");
 		boton7.setBackground(new Color(245, 255, 250));
 		boton7.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-
-				/*
-				 * Como variable turno es true por default , esto es con la
-				 * finalidad que se muestre un CIRCULO indicando el turno del
-				 * jugador1 ,despues de ejecutar la variable turno cambia de
-				 * valor a false para que el siguiente boton sin importar el
-				 * lugar cambie a X indicando el turno del jugaro2. Cada boton
-				 * tendra una variable por nombre btn(#boton)indicando un valor
-				 * [1]= al turno 1; valor [2]= al turno 2; para validar en el
-				 * metodo comprobacion el ganador del juego.
-				 */
-
 				if (turno == true) {
 					boton7.setIcon(new ImageIcon(JuegoGato.class.getResource("/Imagenes/picmonkey_image (2).jpg")));
 					turno = false;
@@ -120,8 +109,9 @@ public class JuegoGato extends JFrame {
 					btn7 = 2;
 
 				}
+				boton7.removeActionListener(boton7.getActionListeners()[0]);
 				System.out.println(turno + "" + btn7);
-				Comprobacion();
+				ganador.Comprobacion(btn1, btn2, btn3, btn4, btn5, btn6, btn7, btn8, btn9);
 			}
 		});
 		boton7.setBounds(55, 258, 50, 50);
@@ -140,8 +130,9 @@ public class JuegoGato extends JFrame {
 					turno = true;
 					btn1 = 2;
 				}
+				boton1.removeActionListener(boton1.getActionListeners()[0]);
 				System.out.println(turno + "" + btn1);
-				Comprobacion();
+				ganador.Comprobacion(btn1, btn2, btn3, btn4, btn5, btn6, btn7, btn8, btn9);
 			}
 
 		});
@@ -165,8 +156,9 @@ public class JuegoGato extends JFrame {
 					turno = true;
 					btn4 = 2;
 				}
+				boton4.removeActionListener(boton4.getActionListeners()[0]);
 				System.out.println(turno + "" + btn4);
-				Comprobacion();
+				ganador.Comprobacion(btn1, btn2, btn3, btn4, btn5, btn6, btn7, btn8, btn9);
 			}
 		});
 		boton4.setBounds(55, 197, 50, 50);
@@ -186,7 +178,8 @@ public class JuegoGato extends JFrame {
 					turno = true;
 					btn8 = 2;
 				}
-				Comprobacion();
+				boton8.removeActionListener(boton8.getActionListeners()[0]);
+				ganador.Comprobacion(btn1, btn2, btn3, btn4, btn5, btn6, btn7, btn8, btn9);
 			}
 		});
 		boton8.setBounds(121, 258, 50, 50);
@@ -208,7 +201,8 @@ public class JuegoGato extends JFrame {
 					turno = true;
 					btn2 = 2;
 				}
-				Comprobacion();
+				boton2.removeActionListener(boton2.getActionListeners()[0]);
+				ganador.Comprobacion(btn1, btn2, btn3, btn4, btn5, btn6, btn7, btn8, btn9);
 			}
 		});
 		boton2.setBounds(121, 136, 50, 50);
@@ -227,7 +221,9 @@ public class JuegoGato extends JFrame {
 					turno = true;
 					btn5 = 2;
 				}
-				Comprobacion();
+				boton5.removeActionListener(boton5.getActionListeners()[0]);
+				ganador.Comprobacion(btn1, btn2, btn3, btn4, btn5, btn6, btn7, btn8, btn9);
+
 			}
 		});
 		boton5.setBounds(121, 197, 50, 50);
@@ -246,7 +242,8 @@ public class JuegoGato extends JFrame {
 					turno = true;
 					btn3 = 2;
 				}
-				Comprobacion();
+				boton3.removeActionListener(boton3.getActionListeners()[0]);
+				ganador.Comprobacion(btn1, btn2, btn3, btn4, btn5, btn6, btn7, btn8, btn9);
 			}
 		});
 		boton3.setBounds(185, 136, 50, 50);
@@ -265,7 +262,8 @@ public class JuegoGato extends JFrame {
 					turno = true;
 					btn6 = 2;
 				}
-				Comprobacion();
+				boton6.removeActionListener(boton6.getActionListeners()[0]);
+				ganador.Comprobacion(btn1, btn2, btn3, btn4, btn5, btn6, btn7, btn8, btn9);
 			}
 		});
 		boton6.setBounds(185, 197, 50, 50);
@@ -273,6 +271,8 @@ public class JuegoGato extends JFrame {
 
 		JButton boton9 = new JButton("");
 		boton9.setBackground(new Color(245, 255, 250));
+		boton9.setBounds(185, 258, 50, 50);
+		contentPane.add(boton9);
 		boton9.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				if (turno == true && btn9 == 0) {
@@ -284,11 +284,11 @@ public class JuegoGato extends JFrame {
 					turno = true;
 					btn9 = 2;
 				}
-				Comprobacion();
+				boton9.removeActionListener(boton9.getActionListeners()[0]);
+				ganador.Comprobacion(btn1, btn2, btn3, btn4, btn5, btn6, btn7, btn8, btn9);
+
 			}
 		});
-		boton9.setBounds(185, 258, 50, 50);
-		contentPane.add(boton9);
 
 		txtJugador1 = new JTextField();
 		txtJugador1.addActionListener(new ActionListener() {
@@ -320,55 +320,5 @@ public class JuegoGato extends JFrame {
 		JLabel lblJugador_1 = new JLabel("Jugador 2");
 		lblJugador_1.setBounds(185, 42, 71, 14);
 		contentPane.add(lblJugador_1);
-
-		// mostrar en pantalla marcador inicial
-
 	}
-
-	// comprobacion en forma horizontal ,vertical & Diagonal
-	public void Comprobacion() {
-		if ((btn1 == 1 && btn2 == 1 && btn3 == 1) || (btn4 == 1 && btn5 == 1 && btn6 == 1)
-				|| (btn7 == 1 && btn8 == 1 && btn9 == 1)) {
-			txtJugador1.setText(txtJugador1.getText() + ("1"));
-			txtJugador2.setText("0");
-
-			System.out.println("JUGADOR[2]-NEGRO");
-			JOptionPane.showMessageDialog(this, "JUGADOR 1", "GANADOR", JOptionPane.INFORMATION_MESSAGE);
-		} else if ((btn1 == 1 && btn4 == 1 && btn7 == 1) || (btn2 == 1 && btn5 == 1 && btn8 == 1)
-				|| (btn3 == 1 && btn6 == 1 && btn9 == 1)) {
-			txtJugador1.setText(txtJugador1.getText() + ("1"));
-			txtJugador2.setText("0");
-
-			System.out.println("JUGADOR[2]-NEGRO");
-			JOptionPane.showMessageDialog(this, "JUGADOR 1", "GANADOR", JOptionPane.INFORMATION_MESSAGE);
-		} else if ((btn1 == 1 && btn5 == 1 && btn9 == 1) || (btn3 == 1 && btn5 == 1 && btn7 == 1)) {
-			txtJugador1.setText(txtJugador1.getText() + ("1"));
-			;
-			txtJugador2.setText("0");
-
-			System.out.println("JUGADOR[2]-NEGRO");
-			JOptionPane.showMessageDialog(this, "JUGADOR 1", "GANADOR", JOptionPane.INFORMATION_MESSAGE);
-		} else if ((btn1 == 2 && btn2 == 2 && btn3 == 2) || (btn4 == 2 && btn5 == 2 && btn6 == 2)
-				|| (btn7 == 2 && btn8 == 2 && btn9 == 2)) {
-			txtJugador2.setText(txtJugador2.getText() + ("1"));
-			txtJugador1.setText("0");
-
-			System.out.println("JUGADOR[2]-ROJO");
-			JOptionPane.showMessageDialog(this, "JUGADOR 2", "GANADOR", JOptionPane.INFORMATION_MESSAGE);
-		} else if ((btn1 == 2 && btn4 == 2 && btn7 == 2) || (btn2 == 2 && btn5 == 2 && btn8 == 2)
-				|| (btn3 == 2 && btn6 == 2 && btn9 == 2)) {
-			txtJugador2.setText(txtJugador2.getText() + ("1"));
-			txtJugador1.setText("0");
-
-			System.out.println("JUGADOR[2]-ROJO");
-			JOptionPane.showMessageDialog(this, "JUGADOR 2", "GANADOR", JOptionPane.INFORMATION_MESSAGE);
-		} else if ((btn1 == 2 && btn5 == 2 && btn9 == 2) || (btn3 == 2 && btn5 == 2 && btn7 == 2)) {
-			txtJugador2.setText(txtJugador2.getText() + ("1"));
-			txtJugador1.setText("0");
-
-			System.out.println("JUGADOR[2]-ROJO");
-			JOptionPane.showMessageDialog(this, "JUGADOR 2", "GANADOR", JOptionPane.INFORMATION_MESSAGE);
-		}
-	}
-
 }// FIN clase JUEGO GATO
