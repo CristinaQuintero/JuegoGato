@@ -39,10 +39,7 @@ public class JuegoGato extends JFrame {
 	Boolean turno = true;// se inicia con el turno jugador1 por default CIRCULO
 	Comprobacion ganador = new Comprobacion();
 	int btn1, btn2, btn3, btn4, btn5, btn6, btn7, btn8, btn9;
-
-	/**
-	 * Launch the application.
-	 */
+	boolean nuevo = false;
 
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
@@ -58,9 +55,6 @@ public class JuegoGato extends JFrame {
 
 	}// FIN DE LA CLASE MAIN
 
-	/**
-	 * Create the frame.
-	 */
 	public JuegoGato() {
 
 		setIconImage(Toolkit.getDefaultToolkit().getImage(JuegoGato.class.getResource("/Imagenes/TicTacToe.png")));
@@ -94,6 +88,7 @@ public class JuegoGato extends JFrame {
 		lblTurno.setFont(new Font("SimHei", Font.BOLD, 25));
 		lblTurno.setBounds(96, 11, 81, 30);
 		contentPane.add(lblTurno);
+
 		JButton boton7 = new JButton("");
 		boton7.setBackground(new Color(245, 255, 250));
 		boton7.addActionListener(new ActionListener() {
@@ -107,7 +102,6 @@ public class JuegoGato extends JFrame {
 					boton7.setIcon(new ImageIcon(JuegoGato.class.getResource("/Imagenes/picmonkey_image.jpg")));
 					turno = true;
 					btn7 = 2;
-
 				}
 				boton7.removeActionListener(boton7.getActionListeners()[0]);
 				System.out.println(turno + "" + btn7);
@@ -189,9 +183,6 @@ public class JuegoGato extends JFrame {
 		boton2.setBackground(new Color(245, 255, 250));
 		boton2.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-
-				// cambio de imagen
-
 				if (turno == true) {
 					boton2.setIcon(new ImageIcon(JuegoGato.class.getResource("/Imagenes/picmonkey_image (2).jpg")));
 					turno = false;
@@ -253,7 +244,7 @@ public class JuegoGato extends JFrame {
 		boton6.setBackground(new Color(245, 255, 250));
 		boton6.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				if (turno == true && btn6 == 0) {
+				if (turno == true) {
 					boton6.setIcon(new ImageIcon(JuegoGato.class.getResource("/Imagenes/picmonkey_image (2).jpg")));
 					turno = false;
 					btn6 = 1;
@@ -275,7 +266,7 @@ public class JuegoGato extends JFrame {
 		contentPane.add(boton9);
 		boton9.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				if (turno == true && btn9 == 0) {
+				if (turno == true) {
 					boton9.setIcon(new ImageIcon(JuegoGato.class.getResource("/Imagenes/picmonkey_image (2).jpg")));
 					turno = false;
 					btn9 = 1;
@@ -286,28 +277,18 @@ public class JuegoGato extends JFrame {
 				}
 				boton9.removeActionListener(boton9.getActionListeners()[0]);
 				ganador.Comprobacion(btn1, btn2, btn3, btn4, btn5, btn6, btn7, btn8, btn9);
-
 			}
 		});
 
 		txtJugador1 = new JTextField();
-		txtJugador1.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-
-			}
-		});
+		txtJugador1.setText("" + ganador.puntoN);
 		txtJugador1.setFont(new Font("Verdana", Font.BOLD, 15));
 		txtJugador1.setBounds(61, 67, 41, 43);
 		contentPane.add(txtJugador1);
 		txtJugador1.setColumns(10);
 
 		txtJugador2 = new JTextField();
-		txtJugador2.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-
-			}
-		});
-
+		txtJugador2.setText("" + ganador.puntoR);
 		txtJugador2.setFont(new Font("Verdana", Font.BOLD, 15));
 		txtJugador2.setBounds(236, 67, 43, 43);
 		contentPane.add(txtJugador2);
@@ -319,6 +300,6 @@ public class JuegoGato extends JFrame {
 
 		JLabel lblJugador_1 = new JLabel("Jugador 2");
 		lblJugador_1.setBounds(185, 42, 71, 14);
-		contentPane.add(lblJugador_1);
 	}
+
 }// FIN clase JUEGO GATO
